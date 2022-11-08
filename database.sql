@@ -3,7 +3,7 @@ CREATE TABLE users(
     user_id INTEGER PRIMARY KEY,
     fname VARCHAR(25) NOT NULL,
     lname VARCHAR(25) NOT NULL,
-    password VARCHAR(10) NOT NULL
+    user_password VARCHAR(10) NOT NULL
     email VARCHAR(25) NOT NULL,
     birth_date DATE NOT NULL,
     city VARCHAR(25) NOT NULL,
@@ -15,11 +15,11 @@ CREATE TABLE users(
 CREATE TABLE restaurants(
     restaurant_id INTEGER PRIMARY KEY,
     external_id INTEGER,
-    name VARCHAR(25) NOT NULL,
+    restaurant_name VARCHAR(25) NOT NULL,
     email VARCHAR(25) NOT NULL,
-    password VARCHAR(10) NOT NULL,
-    address VARCHAR(25) NOT NULL,
-    state VARCHAR(25) NOT NULL,
+    restaurant_password VARCHAR(10) NOT NULL,
+    restaurant_address VARCHAR(25) NOT NULL,
+    restaurant_state VARCHAR(25) NOT NULL,
     city VARCHAR(25) NOT NULL,
     zip_code INTEGER NOT NULL,
     review_count INTEGER,

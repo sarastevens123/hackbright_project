@@ -18,7 +18,8 @@ class User(db.Model):
     review_count = db.Column(db.Integer)
     score = db.Column(db.Integer)
 
-    user_rating = db.relationships("User_ratings", back_populates="user")
+    user_rating = db.relationships("User_rating", back_populates="user")
+    restaurant_rating= db.relationships("Restaurant_rating", back_populates="user")
 
     def __repr__(self):
         return f"<User user_id={self.user_id} fname={self.fname}>"
@@ -32,20 +33,61 @@ class Restaurant(db.model):
 
     restaurant_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     external_id = db.Column(db.Integer)
-    name = db.Column(db.Varchar(25), nullable=False)
+    restaurant_name = db.Column(db.Varchar(25), nullable=False)
     email = db.Column(db.Varchar(25), nullable=False)
-    password = db.Column(db.Varchar(10), nullable=False)
-    address = db.Column(db.Varchar(25), nullable=False)
-    state = db.Column(db.Varchar(25), nullable=False)
+    restaurant_password = db.Column(db.Varchar(10), nullable=False)
+    restaurant_address = db.Column(db.Varchar(25), nullable=False)
+    restaurant_state = db.Column(db.Varchar(25), nullable=False)
     city = db.Column(db.Varchar(25), nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)
     review_count = db.Column(db.Integer)
-    score =   
+    score = db.Column(db.Integer)
     
-    restaurant_rating = db.relationships()
+    restaurant_rating = db.relationships("Restaurant_rating", back_populates="restaurant")
+    user_rating = db.relationships("User_rating", back_populates="restaurant")
+
+
+    def __repr__(self):
+        return f"<Restaurant restaurant_id={self.restaurant_id} restaurant_name={self.restaurant_name}>"
+
+class Restaurant_rating(db.model):
+    """Data model for restaurants rating"""
+
+    __tablename__ = "restaurant_ratings"
+
+    rating_id = db.Colum(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    restaurant_id = db.Column(db.Integer, nullable=False)
+    rating_score = db.Column(db.Integer, nullable=False)
+    rating_text = db.Column(db.Text)
+
+    restaurant = db.relationships("Restaurant", back_populates="restaurant_rating")
+    user = db.relationships("User", back_populates="user")
+
+
+    def __repr__(self):
+        return f"<Restaurant_rating rating_id={self.rating_id} score{self.rating_score}>"
     
 
-    
+class User_rating(db.model):
+    """Data model for user ratings"""
+
+    __tablename__ = "user_ratings"
+
+    rating_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    restaurant_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer)
+    rating_score = db.Column(db.Integer, nullable=False)
+    rating_text = db.Column(db.Text, nullable=False)
+
+    restaurant = db.relationships("Restaurant", back_populates="restaurant_rating")
+    user = db.relationships("User", back_populates="user")
+
+
+    def __repr__ (self):
+        return f"<User_rating rating_id={self.rating_id} score={self.score}>"
+
+
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
