@@ -6,13 +6,17 @@ def create_user(email, user_password):
     """Create and return a new user."""
 
     user = User(email=email, user_password=user_password)
-
+    db.session.add(user)
+    db.session.commit()
+    
     return user
 
 def create_restaurant(email, restaurant_password):
     """Create and return a new restaurant."""
 
     restaurant = Restaurant(email=email, restaurant_password=restaurant_password)
+    db.session.add(restaurant)
+    db.session.commit()
 
     return restaurant
 
