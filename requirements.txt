@@ -2,6 +2,7 @@ attrs==21.4.0
 click==8.0.1
 Flask==2.0.1
 Flask-SQLAlchemy==2.5.1
+Flask-login==0.6.2
 greenlet==1.1.2
 iniconfig==1.1.1
 itsdangerous==2.0.1
