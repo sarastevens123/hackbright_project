@@ -15,10 +15,19 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
-def homepage():
+def display_homepage():
     """Display the homepage"""
 
     return render_template('homepage.html')
+
+
+
+@app.route('sign_up', methods=['POST'])
+def sign_up():
+    """Creates a new user"""
+
+
+
 
 
 @app.route('/login', methods=['POST'])
@@ -29,18 +38,21 @@ def handle_guest_login():
 
     user = crud.get_user_by_email(email)
 
-    if password == user.password:
-        session['user'] = user.user_id
-        flash('Login successful!')
+    for users in crud.return_all_users():
+        if user in users:
+            session['user'] = user
+            flash('Login successful')
+            return redirect('/profile')
 
-        return redirect('/profile')
+        else:
+            flash("User not found. Please create an account")
+            return redirect('/login')
 
-    else:
-        flash('User not found')
-        create_new = input('Would you like to create a new account?')
+        
 
-        if create_new == 'Yes':
-            return redirect('/create')
+        
+
+  
 
 
 @app.route('/create', methods=['POST'])
@@ -54,7 +66,12 @@ def display_profile():
     return 
 
 
-
+if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        use_reloader=True,
+        use_debugger=True,
+    )
 
 
 
