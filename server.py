@@ -22,9 +22,25 @@ def display_homepage():
 
 
 
-@app.route('sign_up', methods=['POST'])
+@app.route('/sign-up', methods=['POST'])
 def sign_up():
     """Creates a new user"""
+    
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_email(email)
+    if user:
+        flash("Cannot create an account with that email. Try again.")
+    else:
+        user = crud.create_user(email, password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! Please log in.")
+
+    return redirect("/")
+
 
 
 
@@ -36,13 +52,15 @@ def handle_guest_login():
     email = request.form.get('email')
     password = request.form.get('password')
 
+    
     user = crud.get_user_by_email(email)
 
     for users in crud.return_all_users():
         if user in users:
-            session['user'] = user
-            flash('Login successful')
-            return redirect('/profile')
+            if password in crud.get_user_password():
+                session['user'] = user
+                flash('Login successful')
+                return redirect('/profile')
 
         else:
             flash("User not found. Please create an account")

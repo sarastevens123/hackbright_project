@@ -1,17 +1,16 @@
+
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>
-      {% block title %}{% endblock %}
-    </title>
+<html lang="en">
+    <head>
+        <link href="/static/stylesheet.css" rel="stylesheet" type="text/css">
+    </head>
 
-    {% block head %}{% endblock %}
-  </head>
-  <body>
-    {% block body %}{% endblock %}
-
-    {% block after_body %}{% endblock %}
-  </body>
-</html>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kickback</title>
+    <body>
+      <script src="/static/handling_user.js"></script>
+        <div class='page-background'></div>
+        {% block content %}{% endblock %}
+    </body>

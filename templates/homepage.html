@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html>
+{% block content %}
+
     <header>
-        <a class="logo" href="https://images.unsplash.com/photo-1605559911160-a3d95d213904?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80">
-            Kickback 
-        </a>
+     //#implement logo header  
+     <img class="logo" />
     </header>
-   
+    <h1>Log in</h1>
 
-    <body>
-    
-        
+    <form  id="login-form" action="/login" method="POST">
+        <p>Email:
+            <input type="text" name="email" required>
+        </p>
 
-    </body>
+        <p> Password:
+            <input type="password" name="password" required>
+        </p>
+        <ul>
+            <li>
+                <a href="/create">Create new account</a>
+            </li>
+        </ul>
+        <div>
+            <input id="login-button" type="submit">
+        </div>
+    </form>
 
-</html>
+    <h2>Sign up</h2>
+
+    <form action="/sign-up" method="POST">
+        <button type="##option-button##">Guest, Restaurant</button>
+        <label for="email-field">What is your email?</label>
+        <input id="email-field" type="text" name="email" required />
+        <button class="create-account">get started</button>
+    </form>
+
+{% endblock %}

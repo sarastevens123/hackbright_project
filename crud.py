@@ -20,6 +20,11 @@ def create_restaurant(restaurant_name, email, restaurant_password, restaurant_ad
 
     return restaurant
 
+def log_in_user(email, password):
+    """Logs a user into their account"""
+
+    
+
 def return_all_users():
     """"Return a list of all users."""
 
