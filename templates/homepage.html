@@ -1,37 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
-
     <header>
      //#implement logo header  
      <img class="logo" />
     </header>
     <h1>Log in</h1>
 
-    <form  id="login-form" action="/login" method="POST">
+
+    <form   class="column" action="/login" method="POST">
         <p>Email:
             <input type="text" name="email" required>
         </p>
 
         <p> Password:
-            <input type="password" name="password" required>
+            <input type="text" name="password" required>
         </p>
-        <ul>
+       
+        <div>
+            <button type="button" class="button-1">submit</button>
+        </div>
+
+        <ul>     
             <li>
                 <a href="/create">Create new account</a>
             </li>
         </ul>
-        <div>
-            <input id="login-button" type="submit">
-        </div>
     </form>
 
     <h2>Sign up</h2>
 
-    <form action="/sign-up" method="POST">
-        <button type="##option-button##">Guest, Restaurant</button>
+    <form class="row" action="/sign-up"  method="POST">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="button">Guest</button>
+            <button class="btn btn-outline-secondary" type="button">Restaurant</button>
+        </div>
         <label for="email-field">What is your email?</label>
         <input id="email-field" type="text" name="email" required />
-        <button class="create-account">get started</button>
+        <button class="mybutton">get started</button>
     </form>
 
 {% endblock %}
