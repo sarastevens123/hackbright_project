@@ -15,8 +15,8 @@ class User(db.Model):
     profile_img = db.Column(db.String)
   
 
-    #user_ratings = db.relationship("UserRating")
-    #restaurant_ratings= db.relationship("RestaurantRating")
+    user_ratings = db.relationship("UserRating", back_populates='user')
+    restaurant_ratings= db.relationship("RestaurantRating", back_populates='user')
 
     def __repr__(self):
         return f"<User user_id={self.user_id} fname={self.fname}>"
@@ -36,8 +36,8 @@ class Restaurant(db.Model):
     profile_img = db.Column(db.String)
     
     
-    # restaurant_ratings = db.relationship("RestaurantRating")
-    # user_ratings = db.relationship("UserRating")
+    restaurant_ratings = db.relationship("RestaurantRating", back_populates="restaurant")
+    user_ratings = db.relationship("UserRating", back_populates="restaurant")
 
 
     def __repr__(self):
@@ -55,8 +55,8 @@ class RestaurantRating(db.Model):
     rating_text = db.Column(db.Text)
     rating_img = db.Column(db.String)
 
-    # restaurant = db.relationship("Restaurant")
-    # user = db.relationship("User", backref=db.backref("restaurant_ratings"))
+    restaurant = db.relationship("Restaurant", back_populates="restaurant_ratings")
+    user = db.relationship("User", back_populates="restaurant_ratings")
 
 
     def __repr__(self):
@@ -75,12 +75,12 @@ class UserRating(db.Model):
     rating_text = db.Column(db.Text, nullable=False)
     rating_img = db.Column(db.String)
 
-    # restaurant = db.relationship("Restaurant")
-    # user = db.relationship("User", backref=db.backref("user_ratings"))
+    restaurant = db.relationship("Restaurant", back_populates="user_ratings")
+    user = db.relationship("User", back_populates="user_ratings")
 
 
     def __repr__ (self):
-        return f"<User_rating rating_id={self.rating_id} score={self.score}>"
+        return f"<User_rating rating_id={self.rating_id} score={self.rating_score}>"
 
 
 def connect_to_db(app):

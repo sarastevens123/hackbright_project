@@ -21,4 +21,14 @@ if __name__ == "__main__":
     model.db.session.add(user)
     model.db.session.commit()
 
-    
+    restaurant = crud.create_restaurant('name', 'email', 'password', '112 address', 'img')
+    model.db.session.add(restaurant)
+    model.db.session.commit()
+
+    user_review = crud.create_user_rating(user.user_id, restaurant.restaurant_id, '5', 'text', 'img')
+    model.db.session.add(user_review)
+    model.db.session.commit()
+
+    restaurant_review = crud.create_restaurant_rating(user.user_id, restaurant.restaurant_id, '3', 'text', 'img')
+    model.db.session.add(restaurant_review)
+    model.db.session.commit()

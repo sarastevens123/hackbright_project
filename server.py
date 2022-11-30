@@ -115,6 +115,7 @@ def submit_restaurant_rating():
 
 
 if __name__ == "__main__":
+    connect_to_db(app)
     app.run(
         host="0.0.0.0",
         use_reloader=True,
