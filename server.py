@@ -86,29 +86,33 @@ def handle_guest_login():
 @app.route('/user-rating', methods=['POST', 'GET'])
 def submit_user_rating():
 
-    guest = request.form.get('guest')
-    restaurant = request.form.get('restaurant')
-    score = request.form.get('score')
-    review = request.form.get('review')
-    image = request.form.get('image')
-    # the column is user_id i need it to take in a guest name.
-    rating = crud.create_user_rating( restaurant_id=restaurant, rating_score=score, rating_text=review, rating_img=image, user_id=guest)
-    db.session.add(rating)
-    db.session.commit()
-
-    
+    if request.form.get == 'user-rating':
+        guest = request.form.get('guest')
+        restaurant = request.form.get('restaurant')
+        score = request.form.get('score')
+        review = request.form.get('review')
+        image = request.form.get('image')
+        # the column is user_id i need it to take in a guest name.
+        rating = crud.create_user_rating( restaurant_id=restaurant, rating_score=score, rating_text=review, rating_img=image, user_id=guest)
+        db.session.add(rating)
+        db.session.commit()
+    return render_template('user-rating-form.html')
+        
 @app.route('/restaurant-rating', methods=['POST', 'GET'])
 def submit_restaurant_rating():
 
-    restaurant = request.form.get('restaurant')
-    score = request.form.get('score')
-    review = request.form.get('review')
-    image = request.form.get('image')
-    # the column is restaurant_id i need it to take in a restaurant name.
-    rating = crud.create_restaurant_rating( rating_score=score, rating_text=review, rating_img=image, restaurant_id=restaurant)
-    db.session.add(rating)
-    db.session.commit()
-     
+    if request.form.get == 'restaurant-rating':
+        restaurant = request.form.get('restaurant')
+        score = request.form.get('score')
+        review = request.form.get('review')
+        image = request.form.get('image')
+        # the column is restaurant_id i need it to take in a restaurant name.
+        rating = crud.create_restaurant_rating( rating_score=score, rating_text=review, rating_img=image, restaurant_id=restaurant)
+        db.session.add(rating)
+        db.session.commit()
+    
+    return render_template('restaurant-rating-form.html')
+        
 
 
 
