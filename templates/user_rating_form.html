@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="/user-rating" method="POST">
+
+    <span>Restaurant Name:</span>
+    <input type="text" name="restaurant" required>
+
+    <span>Name of Guest:</span>
+    <input type="text" name="guest" required>
+    
+    <span>Score(1-10):</span>
+    <input type="text" name="score" required>
+
+    <span>Review:</span>
+    <input type="text" name="review">
+
+    <span>Image:</span>
+    <input type="text" name="image">
+
+    <input type="submit" value="Post reveiw">
+    
+</form>
+
+
+
+
+{% endblock %}

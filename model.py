@@ -15,8 +15,8 @@ class User(db.Model):
     profile_img = db.Column(db.String)
   
 
-    user_ratings = db.relationship("UserRating")
-    restaurant_ratings= db.relationship("RestaurantRating")
+    #user_ratings = db.relationship("UserRating")
+    #restaurant_ratings= db.relationship("RestaurantRating")
 
     def __repr__(self):
         return f"<User user_id={self.user_id} fname={self.fname}>"
@@ -36,8 +36,8 @@ class Restaurant(db.Model):
     profile_img = db.Column(db.String)
     
     
-    restaurant_ratings = db.relationship("RestaurantRating")
-    user_ratings = db.relationship("UserRating")
+    # restaurant_ratings = db.relationship("RestaurantRating")
+    # user_ratings = db.relationship("UserRating")
 
 
     def __repr__(self):
@@ -55,8 +55,8 @@ class RestaurantRating(db.Model):
     rating_text = db.Column(db.Text)
     rating_img = db.Column(db.String)
 
-    restaurant = db.relationship("Restaurant")
-    user = db.relationship("User")
+    # restaurant = db.relationship("Restaurant")
+    # user = db.relationship("User", backref=db.backref("restaurant_ratings"))
 
 
     def __repr__(self):
@@ -75,8 +75,8 @@ class UserRating(db.Model):
     rating_text = db.Column(db.Text, nullable=False)
     rating_img = db.Column(db.String)
 
-    restaurant = db.relationship("Restaurant")
-    user = db.relationship("User")
+    # restaurant = db.relationship("Restaurant")
+    # user = db.relationship("User", backref=db.backref("user_ratings"))
 
 
     def __repr__ (self):
@@ -100,4 +100,5 @@ if __name__ == "__main__":
 
     app = Flask(__name__)
     connect_to_db(app)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= True
     

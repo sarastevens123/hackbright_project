@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="/restaurant-signup" method="POST">
+
+    <span>Email:</span>
+    <input type="text" name="email" required>
+
+    <span>Password:</span>
+    <input type="text" name="password" required>
+
+    <span>Restaurant Name:</span>
+    <input type="text" name="first-name" required>
+
+    <span>Restaurant Address:</span>
+    <input type="text" name="last-name" required>
+
+    <span>Profile image:</span>
+    <input type="image" name="profile-image">
+
+    <input type="submit" value="create account" class="create-account-button">
+    
+</form>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 
 .logo {
-    background: left / cover url(/media/examples/puppy-header-logo.jpg);
+    background: left 
     display: flex;
     height: 120px;
     align-items: center;
