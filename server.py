@@ -27,19 +27,20 @@ def home():
 
 @app.route('/user-signup', methods=['POST', 'GET'])
 def signup_new_user():
+    
+    if request.form.get(id) == 'user-signup':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        first_name = request.form.get('first-name')
+        last_name = request.form.get('last-name')
+        profile_image = request.form.get('profile-image')
 
-    email = request.form.get('email')
-    password = request.form.get('password')
-    first_name = request.form.get('first-name')
-    last_name = request.form.get('last-name')
-    profile_image = request.form.get('profile-image')
+        user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created. Please log in.")
 
-    user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
-    db.session.add(user)
-    db.session.commit()
-    flash("Account created. Please log in.")
-
-    return render_template('login.html')
+    return render_template('user-signup.html')
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
 def signup_new_restaurant():
