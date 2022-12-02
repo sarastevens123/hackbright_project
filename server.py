@@ -38,7 +38,9 @@ def signup_new_user():
         user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
         db.session.add(user)
         db.session.commit()
+        
         flash("Account created. Please log in.")
+
 
     return render_template('user-signup.html')
 
@@ -55,7 +57,9 @@ def signup_new_restaurant():
         restaurant = crud.create_restaurant(restaurant_name=name, restaurant_password=password, email=email, restaurant_address=address, profile_img=profile_image)
         db.session.add(restaurant)
         db.session.commit()
+
     flash("Account created. Please log in.")
+
 
     return render_template('restaurant-signup.html')
 
@@ -72,15 +76,22 @@ def handle_guest_login():
             flash("User not found. Please create an account")
             return render_template('login.html')
         if password == user.password:
-            session['user'] = user
+            session['user'] = user.user_id
             flash('Login successful')
-            return redirect('/profile')
+            return render_template('login.html')
 
         #user password does not exist
         flash("user password does not match")
         return render_template ('login.html')
     else:
         return render_template('login.html') 
+
+@app.route('/user')
+def user():
+
+    print(session['user'])
+
+    return redirect('/login')
 
 
 @app.route('/user-rating', methods=['POST', 'GET'])
@@ -92,10 +103,12 @@ def submit_user_rating():
         score = request.form.get('score')
         review = request.form.get('review')
         image = request.form.get('image')
-        # the column is user_id i need it to take in a guest name.
+
         rating = crud.create_user_rating( restaurant_id=restaurant, rating_score=score, rating_text=review, rating_img=image, user_id=guest)
         db.session.add(rating)
         db.session.commit()
+
+
     return render_template('user-rating-form.html')
         
 @app.route('/restaurant-rating', methods=['POST', 'GET'])
@@ -106,11 +119,12 @@ def submit_restaurant_rating():
         score = request.form.get('score')
         review = request.form.get('review')
         image = request.form.get('image')
-        # the column is restaurant_id i need it to take in a restaurant name.
+
         rating = crud.create_restaurant_rating( rating_score=score, rating_text=review, rating_img=image, restaurant_id=restaurant)
         db.session.add(rating)
         db.session.commit()
     
+
     return render_template('restaurant-rating-form.html')
         
 
