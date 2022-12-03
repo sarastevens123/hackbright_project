@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <header>
+      
+     <!-- insert kickback logo -->
+    </header>
+    <h1>Log in</h1>
+
+
+    <form   class="column" action="/guest-login" method="POST">
+        <p>Email:</p>
+            <input type="text" name="email" required>
+        
+
+        <p> Password:</p>
+            <input type="text" name="password" required>
+        
+       
+        <div>
+            <input type="submit" class="button-1" value="submit">
+        </div>
+
+       
+    </form>
+
+    <h2>Sign up</h2>
+    
+
+    <form class="row" action="/sign-up"  method="POST">
+        <div class="input-group mb-3">
+            <button id="guest-sign-up-button" class="btn btn-outline-secondary" type="button">Guest sign up</button>
+            <button id="restaurant-sign-up-button" class="btn btn-outline-secondary" type="button">Restaurant sign up</button>
+        </div>
+     
+    </form>
+
+{% endblock %}

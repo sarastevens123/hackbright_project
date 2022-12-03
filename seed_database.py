@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     model.db.create_all()
 
-    user = crud.create_user('sarah', 'stevens', 'password', 'email', 'img')
+    user = crud.create_user('sarah', 'stevens', 'password1', 'email1', 'img')
     model.db.session.add(user)
     model.db.session.commit()
 

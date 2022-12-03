@@ -22,13 +22,13 @@ db.init_app(app)
 def home():
     """Display the homepage"""
 
-    return render_template('index.html')
+    return render_template('home.html')
 
 
-@app.route('/user-signup', methods=['POST', 'GET'])
-def signup_new_user():
+@app.route('/guest-signup', methods=['POST', 'GET'])
+def signup_new_guest():
     
-    if request.form.get(id) == 'user-signup':
+    if request.form.get(id) == 'guest-signup-form':
         email = request.form.get('email')
         password = request.form.get('password')
         first_name = request.form.get('first-name')
@@ -38,8 +38,10 @@ def signup_new_user():
         user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
         db.session.add(user)
         db.session.commit()
+
+        session['user'] = user.user_id
         
-        flash("Account created. Please log in.")
+        flash("Account created. You are now logged in.")
 
 
     return render_template('user-signup.html')
@@ -64,34 +66,70 @@ def signup_new_restaurant():
     return render_template('restaurant-signup.html')
 
 
-@app.route('/login', methods=['POST', 'GET'])
-def handle_guest_login():
-    print('hello')
+@app.route('/guest-login', methods=['POST', 'GET'])
+def log_in_guest():
+    
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
         user = crud.get_user_by_email(email)
+        
+       
+
+        #checks to see if there is a guest account by email
         if user is None:
-            flash("User not found. Please create an account")
-            return render_template('login.html')
+            flash("Guest account not found. Please create an account")
+            return render_template('guest-login.html')
+
+        # checks if the password is linked to the user
         if password == user.password:
             session['user'] = user.user_id
             flash('Login successful')
+            return render_template('home.html')
+
+        #user password does not exist in guest accounts
+        flash("user password does not match")
+        return render_template ('guest-login.html')
+    else:
+        return render_template('guest-login.html') 
+
+
+@app.route('/restaurant-login', methods=['POST', 'GET'])
+def log_in_restaurant():
+    
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = crud.get_restaurant_by_email(email)
+       
+
+        #checks to see if there is a restaurant account by email
+        if user is None:
+            flash("Restaurant account not found. Please create an account")
             return render_template('login.html')
 
-        #user password does not exist
+        # checks if the password is linked to the user
+        if password == user.restaurant_password:
+            session['user'] = user.restaurant_id
+            flash('Login successful')
+            return render_template('home.html')
+       
+
+        #user password does not exist in guest accounts
         flash("user password does not match")
-        return render_template ('login.html')
+        return render_template ('restaurant-login.html')
     else:
-        return render_template('login.html') 
+        return render_template('restaurant-login.html') 
 
 @app.route('/user')
 def user():
 
-    print(session['user'])
+    if session['user']:
+        print('**********here it is**********')
 
-    return redirect('/login')
+    return redirect('/')
 
 
 @app.route('/user-rating', methods=['POST', 'GET'])
