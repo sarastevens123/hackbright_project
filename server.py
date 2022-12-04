@@ -28,7 +28,7 @@ def home():
 @app.route('/guest-signup', methods=['POST', 'GET'])
 def signup_new_guest():
     
-    if request.form.get(id) == 'guest-signup-form':
+    if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         first_name = request.form.get('first-name')
@@ -36,31 +36,33 @@ def signup_new_guest():
         profile_image = request.form.get('profile-image')
 
         user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
-        db.session.add(user)
-        db.session.commit()
+       
 
         session['user'] = user.user_id
         
         flash("Account created. You are now logged in.")
 
 
-    return render_template('user-signup.html')
+    return render_template('guest-signup-form.html')
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
 def signup_new_restaurant():
 
-    if request.form.get == 'restaurant-signup':
+    if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         name = request.form.get('name')
         address = request.form.get('address')
         profile_image = request.form.get('profile-image')
 
-        restaurant = crud.create_restaurant(restaurant_name=name, restaurant_password=password, email=email, restaurant_address=address, profile_img=profile_image)
-        db.session.add(restaurant)
-        db.session.commit()
+        user = crud.create_restaurant(restaurant_name=name, restaurant_password=password, email=email, restaurant_address=address, profile_img=profile_image)
 
-    flash("Account created. Please log in.")
+
+        session['user'] = user.restaurant_id
+
+        flash("Account created. You are now logged in.")
+
+        return redirect('/')
 
 
     return render_template('restaurant-signup.html')
@@ -127,7 +129,8 @@ def log_in_restaurant():
 def user():
 
     if session['user']:
-        print('**********here it is**********')
+        print('**********USER IN SESSION**********')
+        print(session['user'])
 
     return redirect('/')
 
