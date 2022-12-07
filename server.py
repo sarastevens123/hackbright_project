@@ -88,6 +88,7 @@ def log_in_guest():
         if password == user.password:
             session['user'] = user.user_id
             flash('Login successful')
+            print(user.fname, user.lname)
             return render_template('home.html')
 
         #user password does not exist in guest accounts
@@ -116,6 +117,7 @@ def log_in_restaurant():
         if password == user.restaurant_password:
             session['user'] = user.restaurant_id
             flash('Login successful')
+            print(user.restaurant_name)
             return render_template('home.html')
        
 
@@ -131,6 +133,8 @@ def user():
     if session['user']:
         print('**********USER IN SESSION**********')
         print(session['user'])
+    else:
+        print('No user in session')
 
     return redirect('/')
 
@@ -168,7 +172,17 @@ def submit_restaurant_rating():
 
     return render_template('restaurant-rating-form.html')
         
+@app.route('/log-out')
+def log_out_user():
+    """Logs a user out and resets the session"""
 
+    session['user'] = None
+    session.modified = True
+    print('you have been logged out')
+
+    flash('You have been logged out!')
+
+    return redirect('/')
 
 
 
