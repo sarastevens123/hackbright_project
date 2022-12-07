@@ -24,6 +24,15 @@ def home():
 
     return render_template('home.html')
 
+@app.route('/restaurants')
+def list_restaurants():
+    """Shows restauarants that a guest can review""" 
+
+    restaurant_list = crud.return_all_restaurants()  
+    print(restaurant_list)
+
+    return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
+
 
 @app.route('/guest-signup', methods=['POST', 'GET'])
 def signup_new_guest():
@@ -171,7 +180,30 @@ def submit_restaurant_rating():
     
 
     return render_template('restaurant-rating-form.html')
-        
+
+
+
+# @app.route('/restaurants')
+# def list_restaurants():
+#     """Shows restauarants that a guest can review""" 
+
+#     restaurant_list = crud.return_all_restaurants()  
+#     print(restaurant_list)
+
+#     return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
+
+@app.route('/restaurant/<restaurant_id>')
+def show_restaurant(restaurant_id):
+    """Return page showing the details of a given restaurant.
+
+    It'll show all the info about the restaurant as well as provide a button to review them"""
+
+    restaurant = crud.return_restaurant_by_id(restaurant_id)
+    print(restaurant)
+    
+    return render_template('restaurant-details.html', restaurant=restaurant)
+
+
 @app.route('/log-out')
 def log_out_user():
     """Logs a user out and resets the session"""
