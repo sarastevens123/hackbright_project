@@ -26,16 +26,48 @@ def home():
 
 @app.route('/restaurants')
 def list_restaurants():
-    """Shows restauarants that a guest can review""" 
+    """Shows restaurants that a guest can review""" 
 
     restaurant_list = crud.return_all_restaurants()  
     print(restaurant_list)
 
     return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
 
+@app.route('/restaurant/<restaurant_id>')
+def show_restaurant(restaurant_id):
+    """Return page showing the details of a given restaurant.
+
+    It'll show all the info about the restaurant as well as provide a button to review them"""
+
+    restaurant = crud.return_restaurant_by_id(restaurant_id)
+    
+    print(restaurant)
+    average_score = crud.get_average_rest_score(restaurant_id)
+    return render_template('restaurant-details.html', restaurant=restaurant, average_score=average_score)
+
+@app.route('/guests')
+def list_guests():
+    """Shows guests that can be reviewed by a restaurant"""
+
+    guest_list = crud.return_all_users()
+    print(guest_list)
+
+    return render_template('all-guests.html', guest_list=guest_list)
+#This is where you left off
+@app.route('/guest/<user_id>')
+def show_guest(user_id):
+    """Return page showing the details of a given guest.
+    
+    It'll show all the info about a guest as well as provide a button to review them"""
+
+    guest = crud.return_user_by_id(user_id)
+    print(guest)
+    average_score= crud.get_average_guest_score(user_id)
+    return render_template('guest-details.html', guest=guest, average_score=average_score)
 
 @app.route('/guest-signup', methods=['POST', 'GET'])
 def signup_new_guest():
+    "Creates new guest account, adds that data to the database, logs the guest into the session"
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -56,6 +88,7 @@ def signup_new_guest():
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
 def signup_new_restaurant():
+    """Creates new restaurant account, adds restaurant data to database, logs the restaurant into the session"""
 
     if request.method == 'POST':
         email = request.form.get('email')
@@ -180,28 +213,6 @@ def submit_restaurant_rating():
     
 
     return render_template('restaurant-rating-form.html')
-
-
-
-# @app.route('/restaurants')
-# def list_restaurants():
-#     """Shows restauarants that a guest can review""" 
-
-#     restaurant_list = crud.return_all_restaurants()  
-#     print(restaurant_list)
-
-#     return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
-
-@app.route('/restaurant/<restaurant_id>')
-def show_restaurant(restaurant_id):
-    """Return page showing the details of a given restaurant.
-
-    It'll show all the info about the restaurant as well as provide a button to review them"""
-
-    restaurant = crud.return_restaurant_by_id(restaurant_id)
-    print(restaurant)
-    
-    return render_template('restaurant-details.html', restaurant=restaurant)
 
 
 @app.route('/log-out')

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Guests</h2>
+
+    <div id="guest-list">
+        {% for guest in guest_list %}
+        <a href="/guest/{{ guest.user_id }}">{{ guest.fname, guest.lname }}</a>
+        {% endfor %}
+    </div>
+        
+  
+        
+
+{% endblock %}

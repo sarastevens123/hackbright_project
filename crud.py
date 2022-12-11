@@ -41,7 +41,7 @@ def return_user_by_id(user_id):
     return User.query.get(user_id)
 
 def return_restaurant_by_id(restaurant_id):
-    """"Returns a restaurants by their ID."""
+    """"Returns a restaurant by its ID."""
 
     return Restaurant.query.get(restaurant_id)
 
@@ -82,6 +82,37 @@ def create_user_rating(restaurant_id, user_id, rating_score, rating_text, rating
     db.session.commit()
 
     return rating
+
+def get_average_rest_score(restaurant_id):
+
+    total_scores = 0
+    counter = RestaurantRating.query.filter_by(restaurant_id=restaurant_id).count()
+
+    if counter > 0:
+        ratings = RestaurantRating.query.filter_by(restaurant_id=restaurant_id).all()
+
+        for rating in ratings:
+            total_scores = total_scores + int(rating.rating_score)
+
+        average_score = total_scores / counter
+
+        return ("{:.1f}".format(average_score))
+
+
+def get_average_guest_score(user_id):
+
+    total_scores = 0
+    counter = User.query.filter_by(user_id=user_id).count()
+
+    if counter > 0:
+        ratings = User.query.filter_by(user_id=user_id).all()
+
+        for rating in ratings:
+            total_scores = total_scores + int(rating.rating_score)
+        
+        average_score = total_scores / counter
+
+        return ("{:.1f}".format(average_score))
 
 
 if __name__ == '__main__':

@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
+{% block content %}
 
 
 
 
+<div class="restaurant-details">
 
+    <h2>{{ restaurant.restaurant_name }} Details</h2>
 
+    <ul>
+
+        <li>Address: {{ restaurant.restaurant_address }}</li>
+        <li>Score: {{ average_score }}</li>
+    </ul>
+    <button class="new-rest-review">Rate {{ restaurant.restaurant_name }}</button>
+
+</div>
 
 
 
