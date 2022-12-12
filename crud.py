@@ -102,10 +102,10 @@ def get_average_rest_score(restaurant_id):
 def get_average_guest_score(user_id):
 
     total_scores = 0
-    counter = User.query.filter_by(user_id=user_id).count()
+    counter = UserRating.query.filter_by(user_id=user_id).count()
 
     if counter > 0:
-        ratings = User.query.filter_by(user_id=user_id).all()
+        ratings = UserRating.query.filter_by(user_id=user_id).all()
 
         for rating in ratings:
             total_scores = total_scores + int(rating.rating_score)
