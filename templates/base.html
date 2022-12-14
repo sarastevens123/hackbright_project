@@ -10,7 +10,10 @@
     </head>
     
     <body>
-      <p>hello</p>
+      {% if session['user']: %}
+      <p>hello, {{ session['user'] }}</p>
+      {% endif %}
+      
         {% block content %}
         
         

@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                     redirect )
 from flask_sqlalchemy import SQLAlchemy
-from model import connect_to_db, db, UserRating, User, Restaurant, RestaurantRating
+from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
 
@@ -21,8 +21,10 @@ db.init_app(app)
 @app.route('/')
 def home():
     """Display the homepage"""
-
-    return render_template('home.html')
+    if session['user']:
+        return render_template('home.html')
+    else:
+        return render_template('login-route-page.html')
 
 @app.route('/restaurants')
 def list_restaurants():
@@ -53,7 +55,7 @@ def list_guests():
     print(guest_list)
 
     return render_template('all-guests.html', guest_list=guest_list)
-#This is where you left off
+
 @app.route('/guest/<user_id>')
 def show_guest(user_id):
     """Return page showing the details of a given guest.
@@ -112,6 +114,7 @@ def signup_new_restaurant():
 
 @app.route('/guest-login', methods=['POST', 'GET'])
 def log_in_guest():
+    """Log's in a user that is a guest"""
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -142,6 +145,7 @@ def log_in_guest():
 
 @app.route('/restaurant-login', methods=['POST', 'GET'])
 def log_in_restaurant():
+    """Logs in a restaurant"""
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -169,20 +173,22 @@ def log_in_restaurant():
     else:
         return render_template('restaurant-login.html') 
 
-@app.route('/user')
-def user():
+# @app.route('/user')
+# def user():
+#     """Shows the user in the session"""
 
-    if session['user']:
-        print('**********USER IN SESSION**********')
-        print(session['user'])
-    else:
-        print('No user in session')
+#     if session['user']:
+#         print('**********USER IN SESSION**********')
+#         print(session['user'])
+#     else:
+#         print('No user in session')
 
-    return redirect('/')
+#     return redirect('/')
 
 
 @app.route('/user-rating', methods=['POST', 'GET'])
 def submit_user_rating():
+    """adds a user rating"""
 
     if request.form.get == 'user-rating':
         guest = request.form.get('guest')
@@ -200,6 +206,7 @@ def submit_user_rating():
         
 @app.route('/restaurant-rating', methods=['POST', 'GET'])
 def submit_restaurant_rating():
+    """adds a restaurant rating"""
 
     if request.form.get == 'restaurant-rating':
         restaurant = request.form.get('restaurant')
@@ -221,7 +228,7 @@ def log_out_user():
 
     session['user'] = None
     session.modified = True
-    print('you have been logged out')
+    print('You have been logged out')
 
     flash('You have been logged out!')
 
