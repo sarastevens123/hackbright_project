@@ -18,12 +18,7 @@ def create_restaurant(restaurant_name, email, restaurant_password, restaurant_ad
     db.session.add(restaurant)
     db.session.commit()
 
-    return restaurant
-
-def log_in_user(email, password):
-    """Logs a user into their account"""
-
-    
+    return restaurant 
 
 def return_all_users():
     """"Return a list of all users."""
@@ -84,7 +79,7 @@ def create_user_rating(restaurant_id, user_id, rating_score, rating_text, rating
     return rating
 
 def get_average_rest_score(restaurant_id):
-
+    """returns an average restaurant score"""
     total_scores = 0
     counter = RestaurantRating.query.filter_by(restaurant_id=restaurant_id).count()
 
@@ -100,7 +95,7 @@ def get_average_rest_score(restaurant_id):
 
 
 def get_average_guest_score(user_id):
-
+    """returns an average guest score"""
     total_scores = 0
     counter = UserRating.query.filter_by(user_id=user_id).count()
 
@@ -114,7 +109,14 @@ def get_average_guest_score(user_id):
 
         return ("{:.1f}".format(average_score))
 
+def get_user_reviews_by_id(user_id):
 
+    reviews = UserRating.query.filter_by(user_id=user_id).all()
+    
+
+    return reviews
+    
+    
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

@@ -134,7 +134,7 @@ def log_in_guest():
             session['user'] = user.user_id
             flash('Login successful')
             print(user.fname, user.lname)
-            return render_template('home.html')
+            return redirect('/')
 
         #user password does not exist in guest accounts
         flash("user password does not match")
@@ -167,7 +167,7 @@ def log_in_restaurant():
             return render_template('home.html')
        
 
-        #user password does not exist in guest accounts
+        #user password does not exist in restaurant accounts
         flash("user password does not match")
         return render_template ('restaurant-login.html')
     else:
@@ -220,6 +220,16 @@ def submit_restaurant_rating():
     
 
     return render_template('restaurant-rating-form.html')
+
+@app.route('/reviews')
+def show_reviews_of_user():
+    """shows a logged in user the reviews made about them"""
+
+
+
+    return 
+
+@app.route
 
 
 @app.route('/log-out')
