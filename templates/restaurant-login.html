@@ -20,15 +20,18 @@
        
     </form>
 
-    <h2>Sign up</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
     
-
-    <form class="row" action="/sign-up"  method="POST">
-        <div class="input-group mb-3">
-            <button id="guest-sign-up-button" class="btn btn-outline-secondary" type="button">Guest sign up</button>
-            <button id="restaurant-sign-up-button" class="btn btn-outline-secondary" type="button">Restaurant sign up</button>
-        </div>
-     
-    </form>
+ 
+    <a href="/restaurant-signup">Sign up</a>
 
 {% endblock %}

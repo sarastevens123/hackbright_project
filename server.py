@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                     redirect )
 from flask_sqlalchemy import SQLAlchemy
-from model import connect_to_db, db
+from model import connect_to_db, db, Restaurant
 import crud
 from jinja2 import StrictUndefined
 
@@ -22,7 +22,9 @@ db.init_app(app)
 def home():
     """Display the homepage"""
     if session['user']:
-        return render_template('home.html')
+        user_id= int(session['user'])
+        user = crud.return_user_by_id((user_id))
+        return render_template('home.html', user_ratings=user.user_ratings)
     else:
         return render_template('login-route-page.html')
 
@@ -86,7 +88,7 @@ def signup_new_guest():
         flash("Account created. You are now logged in.")
 
 
-    return render_template('guest-signup-form.html')
+    return redirect('/')
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
 def signup_new_restaurant():
@@ -104,7 +106,7 @@ def signup_new_restaurant():
 
         session['user'] = user.restaurant_id
 
-        flash("Account created. You are now logged in.")
+       
 
         return redirect('/')
 
@@ -119,7 +121,6 @@ def log_in_guest():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
         user = crud.get_user_by_email(email)
         
        
@@ -132,7 +133,7 @@ def log_in_guest():
         # checks if the password is linked to the user
         if password == user.password:
             session['user'] = user.user_id
-            flash('Login successful')
+           
             print(user.fname, user.lname)
             return redirect('/')
 
@@ -156,13 +157,12 @@ def log_in_restaurant():
 
         #checks to see if there is a restaurant account by email
         if user is None:
-            flash("Restaurant account not found. Please create an account")
-            return render_template('login.html')
+            flash("Restaurant account not found. Try again or create an account")
+            return render_template('restaurant-login.html')
 
         # checks if the password is linked to the user
         if password == user.restaurant_password:
-            session['user'] = user.restaurant_id
-            flash('Login successful')
+            session['user'] = user
             print(user.restaurant_name)
             return render_template('home.html')
        
@@ -204,32 +204,40 @@ def submit_user_rating():
 
     return render_template('user-rating-form.html')
         
+@app.route('/restaurant-rating/<restaurant_id>', methods=['POST', 'GET'])
 @app.route('/restaurant-rating', methods=['POST', 'GET'])
-def submit_restaurant_rating():
+def submit_restaurant_rating(restaurant_id=None):
     """adds a restaurant rating"""
+    
+    
+    user_id= int(session['user'])
+    restaurant_id = int(restaurant_id) if restaurant_id else restaurant_id
 
-    if request.form.get == 'restaurant-rating':
-        restaurant = request.form.get('restaurant')
-        score = request.form.get('score')
+    if request.method == 'POST':
+        
+        restaurant_id = int(request.form.get('restaurant'))
+        score = int(request.form.get('score'))
         review = request.form.get('review')
         image = request.form.get('image')
+        print(request.form)
 
-        rating = crud.create_restaurant_rating( rating_score=score, rating_text=review, rating_img=image, restaurant_id=restaurant)
+        #restaurant_id = crud.get_rest_id_by_name(restaurant)
+        rating = crud.create_restaurant_rating(user_id=user_id, restaurant_id=restaurant_id, rating_score=score, rating_text=review, rating_img=image)
         db.session.add(rating)
         db.session.commit()
-    
 
-    return render_template('restaurant-rating-form.html')
+        
+    return render_template('restaurant-rating-form.html', restaurants=Restaurant.query, restaurant_id=restaurant_id)
 
 @app.route('/reviews')
 def show_reviews_of_user():
     """shows a logged in user the reviews made about them"""
 
-
+    
 
     return 
 
-@app.route
+
 
 
 @app.route('/log-out')
@@ -242,7 +250,7 @@ def log_out_user():
 
     flash('You have been logged out!')
 
-    return redirect('/')
+    return render_template('logged-out.html')
 
 
 

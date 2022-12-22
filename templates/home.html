@@ -9,7 +9,13 @@
 <form action=""
 <button class="profile-buttons">Your reviews</button>
 <form action=""
-<button class="profile-buttons">Reviews of you</button>
+<!-- <button class="profile-buttons">Reviews of you</button> -->
+<p>reviews of you</p>
+{% for rating in user_ratings %}
+<p>{{ rating.rating_score }}</p>
+<p>{{ rating.restaurant.restaurant_name }}</p>
+<p>{{ rating.rating_text }}</p>
+{% endfor %}
 
 
 
@@ -19,7 +25,8 @@
 
 
 
-<button id="log-out-button">Log Out</button>
+<button formaction="/log-out" id="log-out-button">Log Out</button>
+
 
 
 

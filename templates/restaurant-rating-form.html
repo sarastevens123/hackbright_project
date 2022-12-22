@@ -2,22 +2,37 @@
 {% block content %}
 
 <form action="/restaurant-rating" method="POST">
-
+    {{restaurant_id}}
     <span>Name of restaurant:</span>
-    <input type="text" name="restaurant" required>
-    
+    <!-- <input type="text" name="restaurant" required> -->
+    <select name="restaurant">
+        {% for restaurant in restaurants %}
+        {{restaurant_id == restaurant.restaurant_id}}
+        {% if restaurant.restaurant_id == restaurant_id %}
+            <option value="{{ restaurant.restaurant_id }}" selected="selected">{{ restaurant.restaurant_name }}</option>
+        {% else %} 
+            <option value="{{ restaurant.restaurant_id }}">{{ restaurant.restaurant_name }}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
     <span>Score(1-10):</span>
     <input type="text" name="score" required>
 
     <span>Review:</span>
     <input type="text" name="review">
 
-    <span>Image:</span>
-    <input type="text" name="image">
+  
 
+    
     <input type="submit" value="Post reveiw">
     
+    
+    
 </form>
+<form action="/restaurants">
+    <button>See all restaurants</button>
+</form>
+
 
 
 

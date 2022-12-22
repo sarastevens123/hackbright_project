@@ -109,12 +109,28 @@ def get_average_guest_score(user_id):
 
         return ("{:.1f}".format(average_score))
 
-def get_user_reviews_by_id(user_id):
+def get_guest_reviews_by_id(user_id):
+    #return all reviews the logged in GUEST has made
 
-    reviews = UserRating.query.filter_by(user_id=user_id).all()
+    return
+def get_restaurant_reviews_for_guest(user_id):
+    #returns all the reviews about the guest in session, written by the restaurant
+
+
+    return 
+
+
+def get_rest_id_by_name(restaurant_name):
+
+    restaurant = Restaurant.query.filter_by(restaurant_name=restaurant_name).first()
     
 
-    return reviews
+    return restaurant.restaurant_id
+
+    
+ 
+
+    
     
     
 if __name__ == '__main__':
