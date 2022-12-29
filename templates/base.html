@@ -11,8 +11,12 @@
     
     <body>
       {% if session['user']: %}
+      
       <p>hello, {{ session['user'] }}</p>
+      
       {% endif %}
+      
+      
       
         {% block content %}
         

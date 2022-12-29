@@ -23,10 +23,15 @@ def home():
     """Display the homepage"""
     if session['user']:
         user_id= int(session['user'])
-        user = crud.return_user_by_id((user_id))
-        return render_template('home.html', user_ratings=user.user_ratings)
+        guest_user = crud.return_user_by_id((user_id))
+        return render_template('home.html',guest_user=guest_user.fname, user_ratings=guest_user.user_ratings)
+        # elif crud.return_restaurant_by_id(user_id):
+        #     restaurant_user = crud.return_restaurant_by_id(user_id)
+        #     return render_template('home.html',restaurant_user=restaurant_user.restaurant_name)
     else:
-        return render_template('login-route-page.html')
+        return render_template('login-route-page.html', )
+
+#create second route for rendering restaurant homepage
 
 @app.route('/restaurants')
 def list_restaurants():
