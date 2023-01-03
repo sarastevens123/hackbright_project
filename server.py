@@ -24,14 +24,22 @@ def home():
     if session['user']:
         user_id= int(session['user'])
         guest_user = crud.return_user_by_id((user_id))
-        return render_template('home.html',guest_user=guest_user.fname, user_ratings=guest_user.user_ratings)
-        # elif crud.return_restaurant_by_id(user_id):
-        #     restaurant_user = crud.return_restaurant_by_id(user_id)
-        #     return render_template('home.html',restaurant_user=restaurant_user.restaurant_name)
+        return render_template('guest-home.html',guest_user=guest_user.fname, user_ratings=guest_user.user_ratings)
+     
     else:
         return render_template('login-route-page.html', )
 
-#create second route for rendering restaurant homepage
+
+@app.route('/restaurant-home')
+def restaurant_home():
+    """Display the homepage"""
+
+    if session['user']:
+        restaurant_id= int(session['user'])
+        user = crud.return_restaurant_by_id((restaurant_id))
+        return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
+    else:
+        return render_template('login-route-page.html', )
 
 @app.route('/restaurants')
 def list_restaurants():
@@ -169,7 +177,7 @@ def log_in_restaurant():
         if password == user.restaurant_password:
             session['user'] = user
             print(user.restaurant_name)
-            return render_template('home.html')
+            return render_template('restaurant-home.html')
        
 
         #user password does not exist in restaurant accounts
