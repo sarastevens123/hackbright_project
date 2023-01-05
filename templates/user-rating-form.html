@@ -6,9 +6,16 @@
     <span>Restaurant Name:</span>
     <input type="text" name="restaurant" required>
 
-    <span>Name of Guest:</span>
-    <input type="text" name="guest" required>
-    
+    <span>Name of Guest:</span> 
+    <!-- <input type="text" name="guest" required> -->
+    <select name="guest">
+        {% for user in users %}
+        
+        
+            <option value="{{ user.user_id }}" {% if user_id==user.user_id %} selected="selected"{% endif %}>{{ user.fname }}</option>
+        
+        {% endfor %}
+    </select>
     <span>Score(1-10):</span>
     <input type="text" name="score" required>
 

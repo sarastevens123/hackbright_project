@@ -1,9 +1,9 @@
 """Server for user/restaurants ratings app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                    redirect )
+                    redirect, url_for )
 from flask_sqlalchemy import SQLAlchemy
-from model import connect_to_db, db, Restaurant
+from model import connect_to_db, db, Restaurant, User
 import crud
 from jinja2 import StrictUndefined
 
@@ -37,6 +37,8 @@ def restaurant_home():
     if session['user']:
         restaurant_id= int(session['user'])
         user = crud.return_restaurant_by_id((restaurant_id))
+        print(user)
+        print(user.restaurant_ratings)
         return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
     else:
         return render_template('login-route-page.html', )
@@ -166,8 +168,8 @@ def log_in_restaurant():
         password = request.form.get('password')
 
         user = crud.get_restaurant_by_email(email)
+        print(user, user.restaurant_ratings)
        
-
         #checks to see if there is a restaurant account by email
         if user is None:
             flash("Restaurant account not found. Try again or create an account")
@@ -175,18 +177,20 @@ def log_in_restaurant():
 
         # checks if the password is linked to the user
         if password == user.restaurant_password:
-            session['user'] = user
-            print(user.restaurant_name)
-            return render_template('restaurant-home.html')
+            session['user'] = user.restaurant_id
+            print(session['user'])
+            #return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
+            return redirect('/restaurant-home')
        
 
-        #user password does not exist in restaurant accounts
+#         #user password does not exist in restaurant accounts
         flash("user password does not match")
         return render_template ('restaurant-login.html')
     else:
         return render_template('restaurant-login.html') 
+    
 
-# @app.route('/user')
+# # @app.route('/user')
 # def user():
 #     """Shows the user in the session"""
 
@@ -202,7 +206,10 @@ def log_in_restaurant():
 @app.route('/user-rating', methods=['POST', 'GET'])
 def submit_user_rating():
     """adds a user rating"""
-
+    print(request.args)
+    user_id=None
+    if request.args:
+        user_id = int(request.args.get('user_id'))
     if request.form.get == 'user-rating':
         guest = request.form.get('guest')
         restaurant = request.form.get('restaurant')
@@ -215,7 +222,7 @@ def submit_user_rating():
         db.session.commit()
 
 
-    return render_template('user-rating-form.html')
+    return render_template('user-rating-form.html', users=User.query, user_id=user_id)
         
 @app.route('/restaurant-rating/<restaurant_id>', methods=['POST', 'GET'])
 @app.route('/restaurant-rating', methods=['POST', 'GET'])

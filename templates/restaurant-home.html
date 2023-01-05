@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<form action="/user-rating">
+    <button class="profile-buttons">Create new review</button>
+</form>
+
+<p>reviews of you</p>
+{% for rating in restaurant_ratings %}
+    <p>{{ rating.rating_score }}</p>
+    <p>{{ rating.rating_text }}</p>
+    <a href="/user-rating?user_id={{ rating.user_id}}">{{ rating.user.fname  }} {{ rating.user.lname  }}</a>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+<button href="/log-out" id="log-out-button">Log Out</button>
+
+
+
+
+
+{% endblock %}

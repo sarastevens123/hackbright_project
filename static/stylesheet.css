@@ -46,3 +46,9 @@
 .button-1:focus {
   background-color: #F082AC;
 }
+
+#left-col {
+  width: 25%;
+  height: 100%;
+  background-image: url("plate.jpg");
+}
