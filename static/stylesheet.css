@@ -48,7 +48,19 @@
 }
 
 #left-col {
-  width: 25%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("restaurant-image.jpg");
+  background-size: cover;
+  background-color:antiquewhite
+}
+
+#login {
+  /* font-style: ; */
+  /* font-size: ; */
+  width: 100vw;
+  height: 100vh;
   background-image: url("plate.jpg");
+  background-size: cover;
+
 }
