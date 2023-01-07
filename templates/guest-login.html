@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
    <body>
-    <div id="login">
-    <h1>Log in</h1>
+    <div id="login-page">
+    <h1 style="color:#F08A4B;">Log in</h1>
 
 
-    <form   class="column" action="/guest-login" method="POST">
+    <form   class="login-form" action="/guest-login" method="POST">
         <p>Email:</p>
             <input type="text" name="email" required>
         
@@ -22,6 +22,7 @@
     </form>
 
     <a href="/guest-signup">Sign up</a>
+    <a href="/">back to homepage</a>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}

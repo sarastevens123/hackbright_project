@@ -6,14 +6,14 @@
 <form action="/restaurant-rating">
     <button class="profile-buttons">Create new review</button>
 </form>
-<form action=""
-<button class="profile-buttons">Your reviews</button>
-<form action=""
-<!-- <button class="profile-buttons">Reviews of you</button> -->
-<p>reviews of you</p>
+
+<p style="font-weight:bolder; color: #F08A4B;">Reviews</p>
 {% for rating in user_ratings %}
+<p style="font-weight:bolder;">Score:</p>
 <p>{{ rating.rating_score }}</p>
+<p style="font-weight:bolder;">Restaurant:</p>
 <p>{{ rating.restaurant.restaurant_name }}</p>
+<p style="font-weight:bolder;">Review:</p>
 <p>{{ rating.rating_text }}</p>
 {% endfor %}
 
@@ -24,9 +24,9 @@
 
 
 
-
-<button formaction="/log-out" id="log-out-button">Log Out</button>
-
+<form action="/log-out">
+<button id="log-out-button">Log Out</button>
+</form>
 
 
 

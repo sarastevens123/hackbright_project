@@ -1,14 +1,14 @@
 
-.logo {
-    background: left 
-    display: flex;
-    height: 120px;
-    align-items: center;
-    justify-content: center;
-    font: bold calc(1em + 2 * (100vw - 120px) / 100) 'Dancing Script', fantasy;
-    color: #ff0083;
-    text-shadow: #000 2px 2px 0.2rem;
 
+
+.login {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #D78A76;
+
+
+  
+  
 }
 
 
@@ -17,14 +17,12 @@
 
 
 
-
-
 .button-1 {
-  background-color: #EA4C89;
+  background-color: #F3CA40;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #577590;
   cursor: pointer;
   display: inline-block;
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -48,7 +46,7 @@
 
 .button-1:hover,
 .button-1:focus {
-  background-color: #F082AC;
+  background-color: #F08A4B;
 }
 
 #left-col {
@@ -59,12 +57,17 @@
   background-color:antiquewhite
 }
 
-#login {
+#login-page {
   /* font-style: ; */
   /* font-size: ; */
   width: 100vw;
   height: 100vh;
   background-image: url("plate.jpg");
   background-size: cover;
+  font-family: sans-serif;
+  color: #D78A76;
 
 }
+
+
+
