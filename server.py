@@ -82,6 +82,7 @@ def show_guest(user_id):
     guest = crud.return_user_by_id(user_id)
     print(guest)
     average_score= crud.get_average_guest_score(user_id)
+    
     return render_template('guest-details.html', guest=guest, average_score=average_score)
 
 @app.route('/guest-signup', methods=['POST', 'GET'])
@@ -97,13 +98,13 @@ def signup_new_guest():
 
         user = crud.create_user(fname=first_name, password=password,lname=last_name, email=email, profile_img = profile_image)
        
-
         session['user'] = user.user_id
         
         flash("Account created. You are now logged in.")
 
+        return redirect('/')
 
-    return redirect('/')
+    return render_template('guest-signup-form.html')
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
 def signup_new_restaurant():
@@ -123,7 +124,7 @@ def signup_new_restaurant():
 
        
 
-        return redirect('/')
+        return redirect('/restaurant-home')
 
 
     return render_template('restaurant-signup.html')

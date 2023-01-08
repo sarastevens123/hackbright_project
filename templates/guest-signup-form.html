@@ -1,26 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
+<body style="background-color:#D78A76;" class="text-center">
+<!-- <form action="/guest-signup" id="guest-signup-form" method="POST">
 
-<form action="/guest-signup" id="guest-signup-form" method="POST">
-
-    <span>Email:</span>
+    <p>Email:</p>
     <input type="text" name="email" required>
 
-    <span>Password:</span>
+    <p>Password:</p>
     <input type="text" name="password" required>
 
-    <span>First name:</span>
+    <p>First name:</p>
     <input type="text" name="first-name" required>
 
-    <span>Last name:</span>
+    <p>Last name:</p>
     <input type="text" name="last-name" required>
 
    
-    <input type="submit" class="guest-create-account" value="create account">
+    <input type="submit" class="button-1" value="create account">
     <!-- <button class="create-account-button">create account</button> -->
     
+
+
+<form action="/guest-signup" class="form-signin" id="guest-signup" method="POST">
+
+        
+    <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+   
+    <label for="inputEmail" class="sr-only"></label>
+    <input style="max-width:50%; margin:auto;" name="email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    
+    <label for="inputPassword" class="sr-only"></label>
+    <input style="max-width:50%; margin:auto" name="password" type="text" id="inputPassword" class="form-control" placeholder="Password" required>
+    
+    <label for="inputFirstName" class="sr-only"></label>
+    <input style="max-width:50%; margin:auto" name="first-name" type="text" id="inputFirstName" class="form-control" placeholder="First Name" required>
+    
+    <label for="inputLastName" class="sr-only"></label>
+    <input style="max-width:50%; margin:auto" name="last-name" type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
+    
+    
+    <div>
+        <input type="submit" class="button-1" value="submit">
+    </div>
 </form>
+    
 
 
-
+</body>
 {% endblock %}

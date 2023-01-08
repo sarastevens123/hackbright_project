@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+<body style="background-color:#D78A76;"
 
 
 
-<form action="/restaurant-rating">
-    <button class="profile-buttons">Create new review</button>
-</form>
+    <button onclick="location.href='/restaurant-rating';" class="button-1">Create new review</button>
 
-<p style="font-weight:bolder; color: #F08A4B;">Reviews</p>
+
+{% if user_ratings: %}
+<p style="font-weight:bolder; color:black;">Reviews:</p>
 {% for rating in user_ratings %}
 <p style="font-weight:bolder;">Score:</p>
 <p>{{ rating.rating_score }}</p>
@@ -16,7 +17,7 @@
 <p style="font-weight:bolder;">Review:</p>
 <p>{{ rating.rating_text }}</p>
 {% endfor %}
-
+{% endif %}
 
 
 
@@ -25,7 +26,7 @@
 
 
 <form action="/log-out">
-<button id="log-out-button">Log Out</button>
+<button class="button-1">Log Out</button>
 </form>
 
 

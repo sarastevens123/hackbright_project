@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div id="left-col">
 <form action="/restaurant-rating" method="POST">
     
-    <span>Name of restaurant:</span>
+    <p style="color:aliceblue;">Name of restaurant:</p>
     <!-- <input type="text" name="restaurant" required> -->
     <select name="restaurant">
         {% for restaurant in restaurants %}
@@ -15,22 +15,22 @@
         {% endif %}
         {% endfor %}
     </select>
-    <span>Score(1-10):</span>
+    <p style="color:aliceblue;">Score(1-10):</p>
     <input type="text" name="score" required>
 
-    <span>Review:</span>
+    <p style="color:aliceblue;">Review:</p>
     <input type="text" name="review">
 
   
 
-    
-    <input type="submit" value="Post reveiw">
-    
+  <p>
+    <input class="button-1" type="submit" value="Post reveiw">
+   </p> 
     
     
 </form>
 <form action="/restaurants">
-    <button>See all restaurants</button>
+    <button class="button-1">See all restaurants</button>
 </form>
 
 <a href="/">return to homepage</a>  
@@ -41,6 +41,6 @@
 
 
 
-
+</div>
 
 {% endblock %}

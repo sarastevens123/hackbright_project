@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-   <body>
-    <div id="login-page">
-    <h1 style="color:#F08A4B;">Log in</h1>
+   <body style="background-color:#D78A76;" class="text-center">
+    
 
-
-    <form   class="login-form" action="/guest-login" method="POST">
-        <p>Email:</p>
-            <input type="text" name="email" required>
+    <form class="form-signin" action="/guest-login" method="POST">
         
-
-        <p> Password:</p>
-            <input type="text" name="password" required>
-        
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
        
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input style="max-width:50%; margin:auto;" name="email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input style="max-width:50%; margin:auto" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
         <div>
             <input type="submit" class="button-1" value="submit">
         </div>
-
-       
     </form>
-
+<p>
     <a href="/guest-signup">Sign up</a>
+</p>
+<p>
     <a href="/">back to homepage</a>
-
+</p>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class=flashes>
@@ -37,7 +36,7 @@
     
 
    
-    </div>
+    
 </body>
 
 {% endblock %}
