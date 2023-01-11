@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="left-col">
-<form action="/restaurant-rating" method="POST">
+<body class="text-center" id="right-col">
+<!-- <div id="right-col"> -->
+<form action="/restaurant-rating" class="form-signin" id="submit-restaurant-rating" method="POST">
     
-    <p style="color:aliceblue;">Name of restaurant:</p>
-    <!-- <input type="text" name="restaurant" required> -->
+    <p style="color:#F08A48;">Name of restaurant:</p>
+    
     <select name="restaurant">
         {% for restaurant in restaurants %}
         
         {% if restaurant.restaurant_id == restaurant_id %}
-            <option value="{{ restaurant.restaurant_id }}" selected="selected">{{ restaurant.restaurant_name }}</option>
+            <option class=review-input value="{{ restaurant.restaurant_id }}" selected="selected">{{ restaurant.restaurant_name }}</option>
         {% else %} 
-            <option value="{{ restaurant.restaurant_id }}">{{ restaurant.restaurant_name }}</option>
+            <option class=review-input value="{{ restaurant.restaurant_id }}">{{ restaurant.restaurant_name }}</option>
         {% endif %}
         {% endfor %}
     </select>
-    <p style="color:aliceblue;">Score(1-10):</p>
-    <input type="text" name="score" required>
+   
+    <input style="max-width:50%; margin:auto;" name="score" type="text" id="inputScore" class="form-control review-input" placeholder="Score(1-10)" required autofocus>
 
-    <p style="color:aliceblue;">Review:</p>
-    <input type="text" name="review">
-
+    
+    
+    
+    <textarea style="max-width:50%; margin:auto;" id="inputReview" type="text" name="review" class="form-control review-input" rows="4" cols="50" placeholder="Write review here..." required autofocus></textarea>
   
 
   <p>
@@ -41,6 +43,11 @@
 
 
 
-</div>
+<!-- </div> -->
 
+
+    
+
+
+</body>
 {% endblock %}

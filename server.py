@@ -207,10 +207,13 @@ def log_in_restaurant():
 @app.route('/user-rating', methods=['POST', 'GET'])
 def submit_user_rating():
     """adds a user rating"""
+
     print(request.args)
     user_id=None
+    
     if request.args:
         user_id = int(request.args.get('user_id'))
+        
     if request.form.get == 'user-rating':
         guest = request.form.get('guest')
         restaurant = request.form.get('restaurant')
