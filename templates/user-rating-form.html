@@ -2,47 +2,36 @@
 {% block content %}
 <body class="text-center">
 <div id="right-col">
-<form action="/user-rating" id="user-rating" method="POST">
-
-    <!-- <p style="color:aliceblue;">Restaurant Name:</p>
-    <input class="review-input" type="text" name="restaurant" required> -->
-
-    <span style="color:aliceblue;">Name of Guest:</span> 
-    <!-- <input type="text" name="guest" required> -->
-    <select name="guest">
-        {% for user in users %}
-        
-        
-            <option value="{{ user.user_id }}" {% if user_id==user.user_id %} selected="selected"{% endif %}>{{ user.fname }}</option>
-        
-        {% endfor %}
-    </select>
-    
-    <!-- <input style="max-width:50%; margin:auto;" name="score" type="text" id="inputScore" class="form-control review-input" placeholder="Score(1-10)" required autofocus> -->
-    <select style="max-width:50%; margin:auto;" name="score" type="text" class="form-control review-input" placeholder="Score(1-10)" id="exampleFormControlSelect1" required autofocus>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-      </select>
-    
-    
-    
-    <textarea style="max-width:50%; margin:8px auto;" id="inputReview" type="text" name="review" class="form-control review-input" rows="4" cols="50" placeholder="Write review here..." required autofocus></textarea>
-<p>
-    <input class="button-1" type="submit" value="Post reveiw">
-    </p>
-    
-</form>
-
-
-<a href="/restaurant-home">return to homepage</a>
-</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8" style="display: inline-block;">
+                <form action="/user-rating" id="signup-forms" class="form-signin mt-5" method="POST">
+                    <select style="width: 200px; height:40px; margin: 8px auto;" id="inputGuest" type="text" name="guest" class="form-control review-input" placeholder="guest" required autofocus>
+                        {% for user in users %}
+                            <option value="{{ user.user_id }}" {% if user_id==user.user_id %} selected="selected"{% endif %}>{{ user.fname }}</option>
+                        {% endfor %}
+                    </select>
+                    <select style="width:25px; margin:8px auto;" name="score" type="text" class="form-control review-input" placeholder="Score(1-10)" id="exampleFormControlSelect1" required autofocus>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                    
+                    <textarea style="width:200px; margin:8px auto;" id="inputReview" type="text" name="review" class="form-control review-input" rows="4" cols="50" placeholder="Write review here..." required autofocus></textarea>
+                    <p>
+                    <input class="button-1" type="submit" value="Post reveiw">
+                    </p>
+                    <a href="/restaurant-home">return to homepage</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 {% endblock %}

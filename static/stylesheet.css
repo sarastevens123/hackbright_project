@@ -61,7 +61,8 @@
   width: 100vw;
   height: 100vh;
   background-image: url("barstools-image.jpg");
-  background-size: 50%;
+  background-size: cover;
+  
 }
 
 #logo-background {
@@ -90,6 +91,7 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  font-size: 50%;
 }
 
 .review-input:focus {
@@ -98,7 +100,7 @@
 
 textarea {
   width: 100%;
-  height: 150px;
+  height: 100px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -150,5 +152,11 @@ h1 {
 input {
   font-family: 'Anek Gujarati', sans-serif;
   color: black;
+}
+
+placeholder {
+  font-family: 'Anek Gujarati', sans-serif;
+  color: black;
+  font-size: small;
 }
 
