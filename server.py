@@ -117,6 +117,8 @@ def signup_new_restaurant():
         address = request.form.get('address')
         profile_image = request.form.get('profile-image')
 
+    
+
         user = crud.create_restaurant(restaurant_name=name, restaurant_password=password, email=email, restaurant_address=address, profile_img=profile_image)
 
 

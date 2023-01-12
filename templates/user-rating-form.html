@@ -18,11 +18,23 @@
         {% endfor %}
     </select>
     
-    <input style="max-width:50%; margin:auto;" name="score" type="text" id="inputScore" class="form-control review-input" placeholder="Score(1-10)" required autofocus>
-
+    <!-- <input style="max-width:50%; margin:auto;" name="score" type="text" id="inputScore" class="form-control review-input" placeholder="Score(1-10)" required autofocus> -->
+    <select style="max-width:50%; margin:auto;" name="score" type="text" class="form-control review-input" placeholder="Score(1-10)" id="exampleFormControlSelect1" required autofocus>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
     
     
-    <textarea style="max-width:50%; margin:auto;" id="inputReview" type="text" name="review" class="form-control review-input" rows="4" cols="50" placeholder="Write review here..." required autofocus></textarea>
+    
+    <textarea style="max-width:50%; margin:8px auto;" id="inputReview" type="text" name="review" class="form-control review-input" rows="4" cols="50" placeholder="Write review here..." required autofocus></textarea>
 <p>
     <input class="button-1" type="submit" value="Post reveiw">
     </p>

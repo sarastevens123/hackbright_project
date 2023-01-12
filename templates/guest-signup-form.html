@@ -1,52 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 <body style="background-color:#D78A76;" class="text-center">
-<!-- <form action="/guest-signup" id="guest-signup-form" method="POST">
-
-    <p>Email:</p>
-    <input type="text" name="email" required>
-
-    <p>Password:</p>
-    <input type="text" name="password" required>
-
-    <p>First name:</p>
-    <input type="text" name="first-name" required>
-
-    <p>Last name:</p>
-    <input type="text" name="last-name" required>
-
-   
-    <input type="submit" class="button-1" value="create account">
-    <!-- <button class="create-account-button">create account</button> -->
-    
-
-
-<form action="/guest-signup" class="form-signin" id="guest-signup" method="POST">
-
-        
-    <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
-   
-    <label for="inputEmail" class="sr-only"></label>
-    <input style="max-width:35%; margin:auto;" name="email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    
-    <label for="inputPassword" class="sr-only"></label>
-    <input style="max-width:35%; margin:auto" name="password" type="text" id="inputPassword" class="form-control" placeholder="Password" required>
-    <span style="color:black;" passwordHelpInline" class="form-text">
-        *MUST BE LESS THAN 10 CHARACTERS
-      </span>
-    <label for="inputFirstName" class="sr-only"></label>
-    <input style="max-width:35%; margin:auto" name="first-name" type="text" id="inputFirstName" class="form-control" placeholder="First Name" required>
-    
-    <label for="inputLastName" class="sr-only"></label>
-    <input style="max-width:35%; margin:auto" name="last-name" type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
-    
-    
-    <div>
-        <input type="submit" class="button-1" value="submit">
+    <div id="left-col">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8" style="display: inline-block;">
+                    <form action="/guest-signup" class="form-signin" id="signup-forms" method="POST">
+                        <p>sign up here.</p>
+                        <input style="max-width:80%; margin:auto;" name="email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <input style="max-width:80%; margin:auto" name="password" type="text" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <input style="max-width:80%; margin:auto" name="first-name" type="text" id="inputFirstName" class="form-control" placeholder="First Name" required>
+                        <input style="max-width:80%; margin:auto" name="last-name" type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
+                        <div>
+                            <input type="submit" class="button-1" value="submit">
+                        </div>
+                        <span>
+                            <a href="/">back to homepage.</a>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-    
-
-
 </body>
 {% endblock %}

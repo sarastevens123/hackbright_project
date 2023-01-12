@@ -2,6 +2,7 @@
 {% block content %}
 
 <body style="background-color: #d78a76;" class="text-center">
+    
 
 <form action="/user-rating">
     <button class="button-1">Create new review</button>
@@ -9,7 +10,7 @@
 
 <p>reviews of you</p>
 {% for rating in restaurant_ratings %}
-<div class="card border-light mb-3" style="max-width: 18rem;">
+<div class="card border-dark mb-3" style="max-width: 18rem;">
     <div class="card-header"><a href="/user-rating?user_id={{ rating.user_id}}">{{ rating.user.fname  }} {{ rating.user.lname  }}</a></div>
     <div class="card-body">
       <h5 class="card-title">{{ rating.rating_score }}</h5>
@@ -32,6 +33,6 @@
 
 
 
-
+    
 </body>
 {% endblock %}
