@@ -7,8 +7,9 @@
     
 {% if user_ratings: %}
 <p style="font-weight:bolder; color:black;">Reviews:</p>
+<div class="user-ratings-container">
 {% for rating in user_ratings %}
-<div class="card border-light mb-3" style="max-width: 18rem;">
+<div class="card border-light mb-3" style="max-width: 18rem; width: 500px;">
     <div class="card-header">{{ rating.restaurant.restaurant_name }}</div>
     <div class="card-body">
       <h5 class="card-title">{{ rating.rating_score }}</h5>
@@ -17,6 +18,7 @@
 </div>
 
 {% endfor %}
+</div>
 {% endif %}
 
 

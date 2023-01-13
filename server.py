@@ -226,7 +226,7 @@ def submit_user_rating():
         rating = crud.create_user_rating( restaurant_id=restaurant, rating_score=score, rating_text=review, rating_img=image, user_id=guest)
         db.session.add(rating)
         db.session.commit()
-
+        return redirect('/restaurant-home')
 
     return render_template('user-rating-form.html', users=User.query, user_id=user_id)
         
