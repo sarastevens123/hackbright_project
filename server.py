@@ -237,6 +237,7 @@ def submit_restaurant_rating(restaurant_id=None):
     
     
     user_id= int(session['user'])
+    
     restaurant_id = int(restaurant_id) if restaurant_id else restaurant_id
 
     if request.method == 'POST':

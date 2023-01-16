@@ -2,15 +2,15 @@
 {% block content %}
 
 <body style="background-color: #d78a76;" class="text-center">
-    
+  <div class="profile-page">
 
-<form action="/user-rating">
+<!-- <form action="/user-rating">
     <button class="button-1">Create new review</button>
-</form>
+</form> -->
 
-<p>reviews of you</p>
+<h1>new reviews.</h1>
 {% for rating in restaurant_ratings %}
-<div class="card border-dark mb-3" style="max-width: 18rem;">
+<div class="card border-dark mb-3 mx-auto review-cards" style="width: 200px; height: 150px; background-color:#d78a76 ;">
     <div class="card-header"><a href="/user-rating?user_id={{ rating.user_id}}">{{ rating.user.fname  }} {{ rating.user.lname  }}</a></div>
     <div class="card-body">
       <h5 class="card-title">{{ rating.rating_score }}</h5>
@@ -33,6 +33,6 @@
 
 
 
-    
+</div>  
 </body>
 {% endblock %}
