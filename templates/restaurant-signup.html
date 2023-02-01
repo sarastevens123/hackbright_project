@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<body style="background-color:#D78A76;"" class="text-center">
+    <div id="left-col">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8" style="display:inline-block;">
+                    <form action="/restaurant-signup" id="signup-forms" class="form-signin" id="restaurant-signup" method="POST">
+                        <p>sign up here.</p>
+                        <input style="max-width:80%; margin:auto; border-color: black;" name="email" type="text" id="inputEmail" class="form-control" placeholder="email address" required autofocus>
+                        <input style="max-width:80%; margin:8px auto; border-color: black;" name="password" type="text" id="inputPassword" class="form-control" placeholder="password" required>
+                        <input style="max-width:80%; margin:8px auto; border-color: black;" name="name" type="text" id="inputName" class="form-control" placeholder="name" required>
+                        <input style="max-width:80%; margin:8px auto; border-color: black;" name="address" type="text" id="inputAddress" class="form-control" placeholder="mailing address" required>
+                        <div>
+                            <input type="submit" class="button-1" value="submit">
+                        </div>
+                        <span>
+                            <a href="/">back to homepage.</a>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div>  
+</body>
+{% endblock %}
