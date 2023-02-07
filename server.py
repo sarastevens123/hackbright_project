@@ -37,18 +37,18 @@ def restaurant_home():
     if session['user']:
         restaurant_id= int(session['user'])
         user = crud.return_restaurant_by_id((restaurant_id))
-        print(user)
-        print(user.restaurant_ratings)
+        
         return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
     else:
         return render_template('login-route-page.html', )
+
 
 @app.route('/restaurants')
 def list_restaurants():
     """Shows restaurants that a guest can review""" 
 
     restaurant_list = crud.return_all_restaurants()  
-    print(restaurant_list)
+    
 
     return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
 
@@ -60,7 +60,7 @@ def show_restaurant(restaurant_id):
 
     restaurant = crud.return_restaurant_by_id(restaurant_id)
     
-    print(restaurant)
+    
     average_score = crud.get_average_rest_score(restaurant_id)
     return render_template('restaurant-details.html', restaurant=restaurant, average_score=average_score)
 
@@ -69,7 +69,7 @@ def list_guests():
     """Shows guests that can be reviewed by a restaurant"""
 
     guest_list = crud.return_all_users()
-    print(guest_list)
+    
 
     return render_template('all-guests.html', guest_list=guest_list)
 
@@ -80,7 +80,6 @@ def show_guest(user_id):
     It'll show all the info about a guest as well as provide a button to review them"""
 
     guest = crud.return_user_by_id(user_id)
-    print(guest)
     average_score= crud.get_average_guest_score(user_id)
     
     return render_template('guest-details.html', guest=guest, average_score=average_score)
@@ -152,7 +151,6 @@ def log_in_guest():
         if password == user.password:
             session['user'] = user.user_id
            
-            print(user.fname, user.lname)
             return redirect('/')
 
         #user password does not exist in guest accounts
@@ -176,13 +174,13 @@ def log_in_restaurant():
         #checks to see if there is a restaurant account by email
         if user is None:
             flash("Restaurant account not found. Try again or create an account")
+
             return render_template('restaurant-login.html')
 
         # checks if the password is linked to the user
         if password == user.restaurant_password:
             session['user'] = user.restaurant_id
-            print(session['user'])
-            #return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
+            
             return redirect('/restaurant-home')
        
 
@@ -198,24 +196,21 @@ def log_in_restaurant():
 def submit_user_rating(): 
     """adds a user rating"""
 
-    print(request.args)
-    user_id=None
-    
+    restaurant_id = int(session['user'])
     
     if request.args:
         user_id = int(request.args.get('user_id'))
         
-        
-    if request.form.get == 'user-rating':
+    if request.form.get('review'):
         guest_id = request.form.get('guest')
-        restaurant = request.form.get('restaurant')
         score = request.form.get('score')
         review = request.form.get('review')
         image = request.form.get('image')
-
-        rating = crud.create_user_rating(image=image,restaurant_id=restaurant, rating_score=score, rating_text=review, user_id=guest_id)
+        
+        rating = crud.create_user_rating(rating_img=image,restaurant_id=restaurant_id, rating_score=score, rating_text=review, user_id=guest_id)
         db.session.add(rating)
         db.session.commit()
+
         return redirect('/restaurant-home')
 
     return render_template('user-rating-form.html', users=User.query, user_id=user_id)
@@ -236,12 +231,14 @@ def submit_restaurant_rating(restaurant_id=None):
         score = int(request.form.get('score'))
         review = request.form.get('review')
         image = request.form.get('image')
-        print(request.form)
+        
 
-        #restaurant_id = crud.get_rest_id_by_name(restaurant)
+        
         rating = crud.create_restaurant_rating(user_id=user_id, restaurant_id=restaurant_id, rating_score=score, rating_text=review, rating_img=image)
         db.session.add(rating)
         db.session.commit()
+
+        return redirect('/')
 
         
     return render_template('restaurant-rating-form.html', restaurants=Restaurant.query, restaurant_id=restaurant_id)
