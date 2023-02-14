@@ -273,11 +273,8 @@ def log_out_user():
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(
-        host="0.0.0.0",
-        use_reloader=True,
-        use_debugger=True,
-    )
+    app.run()
+   
 
 
 
