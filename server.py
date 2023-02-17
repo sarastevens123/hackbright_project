@@ -224,6 +224,7 @@ def submit_restaurant_rating(restaurant_id=None):
     user_id= int(session['user'])
     
     restaurant_id = int(restaurant_id) if restaurant_id else restaurant_id
+    print(restaurant_id)
 
     if request.method == 'POST':
         
@@ -273,11 +274,11 @@ def log_out_user():
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run()
-    #     host="0.0.0.0",
-    #     use_reloader=False,
-    #     use_debugger=False,
-    # )
+    app.run(
+        host="0.0.0.0",
+        use_reloader=True,
+        use_debugger=True,
+    )
     
    
 

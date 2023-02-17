@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<body style="background-color:#D78A76;" class="text-center">
 
 
 
@@ -9,15 +10,22 @@
     <h2>{{ guest.fname, guest.lname }} Details</h2>
 
     <ul>
-
         <li>Score: {{ average_score }}</li>
     </ul>
     <button class="new-guest-review">Rate {{ guest.fname, guest.lname }}</button>
 
+
+{% for rating in guest.user_ratings %}
+    <p>{{ rating.rating_score }}</p>
+    <p>{{ rating.rating_text }}</p>
+    <p>{{ rating.restaurant.restaurant_name }}</p>
+{% endfor %}
 </div>
 
+<a href="/">return to homepage</a>
 
 
+</body>
 
 
 
