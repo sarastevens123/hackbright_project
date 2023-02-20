@@ -1,8 +1,7 @@
-"""Server for user/restaurants ratings app."""
+"""Server for Kickback app."""
 
 from flask import (Flask, render_template, request, flash, session,
                     redirect )
-from flask_sqlalchemy import SQLAlchemy
 from model import connect_to_db, db, Restaurant, User
 import crud
 from jinja2 import StrictUndefined
@@ -25,7 +24,6 @@ def home():
         user_id= int(session['user'])
         guest_user = crud.return_user_by_id((user_id))
         return render_template('guest-home.html',guest_user=guest_user.fname, user_ratings=guest_user.user_ratings)
-     
     else:
         return render_template('login-route-page.html' )
 
@@ -37,7 +35,6 @@ def restaurant_home():
     if session['user']:
         restaurant_id= int(session['user'])
         user = crud.return_restaurant_by_id((restaurant_id))
-        
         return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
     else:
         return render_template('login-route-page.html', )
@@ -48,7 +45,6 @@ def list_restaurants():
     """Shows restaurants that a guest can review""" 
 
     restaurant_list = crud.return_all_restaurants()  
-    
 
     return render_template('all_restaurants.html', restaurant_list=restaurant_list)   
 
@@ -59,9 +55,8 @@ def show_restaurant(restaurant_id):
     It'll show all the info about the restaurant as well as provide a button to review them"""
 
     restaurant = crud.return_restaurant_by_id(restaurant_id)
-    
-    
     average_score = crud.get_average_rest_score(restaurant_id)
+
     return render_template('restaurant-details.html', restaurant=restaurant, average_score=average_score)
 
 @app.route('/guests')
@@ -70,7 +65,6 @@ def list_guests():
 
     guest_list = crud.return_all_users()
     
-
     return render_template('all-guests.html', guest_list=guest_list)
 
 @app.route('/guest/<user_id>')
@@ -102,7 +96,6 @@ def signup_new_guest():
         flash("Account created. You are now logged in.")
 
         return redirect('/')
-
     return render_template('guest-signup-form.html')
 
 @app.route('/restaurant-signup', methods=['POST', 'GET'])
@@ -116,18 +109,10 @@ def signup_new_restaurant():
         address = request.form.get('address')
         profile_image = request.form.get('profile-image')
 
-    
-
         user = crud.create_restaurant(restaurant_name=name, restaurant_password=password, email=email, restaurant_address=address, profile_img=profile_image)
-
-
         session['user'] = user.restaurant_id
 
-       
-
         return redirect('/restaurant-home')
-
-
     return render_template('restaurant-signup.html')
 
 
@@ -139,8 +124,6 @@ def log_in_guest():
         email = request.form.get('email')
         password = request.form.get('password')
         user = crud.get_user_by_email(email)
-        
-       
 
         #checks to see if there is a guest account by email
         if user is None:
@@ -184,7 +167,7 @@ def log_in_restaurant():
             return redirect('/restaurant-home')
        
 
-#         #user password does not exist in restaurant accounts
+        #user password does not exist in restaurant accounts
         flash("user password does not match")
         return render_template ('restaurant-login.html')
     else:
@@ -197,7 +180,7 @@ def submit_user_rating():
     """adds a user rating"""
 
     restaurant_id = int(session['user'])
-    
+    #
     if request.args:
         user_id = int(request.args.get('user_id'))
         
@@ -244,17 +227,6 @@ def submit_restaurant_rating(restaurant_id=None):
         
     return render_template('restaurant-rating-form.html', restaurants=Restaurant.query, restaurant_id=restaurant_id)
 
-@app.route('/reviews')
-def show_reviews_of_user():
-    """shows a logged in user the reviews made about them"""
-
-    
-
-    return 
-
-
-
-
 @app.route('/log-out')
 def log_out_user():
     """Logs a user out and resets the session"""
@@ -266,10 +238,6 @@ def log_out_user():
     flash('You have been logged out!')
 
     return render_template('logged-out.html')
-
-
-
-
 
 
 if __name__ == "__main__":
