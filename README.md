@@ -36,7 +36,7 @@ In Kickback, a user can be either a guest or a restaurant. Different user types 
 A guest has access to review a nearby restaurant that they have visited by leaving a brief account of their expereience and a score. This review is displayed to the restaurant user once they log in to their profile.
 
 # <img src=/static/dak-chicken-review.png width="50%" height="25%">
-# <img src=/static/review-form.jpg width="50%" height="25%">
+# <img src=/static/review-form.png width="50%" height="25%">
 
 
 ####  Guest Reviews
