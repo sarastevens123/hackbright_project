@@ -20,7 +20,7 @@ db.init_app(app)
 @app.route('/')
 def home():
     """Display the homepage"""
-    if session['user']:
+    if session.get('user'):
         user_id= int(session['user'])
         guest_user = crud.return_user_by_id((user_id))
         return render_template('guest-home.html',guest_user=guest_user.fname, user_ratings=guest_user.user_ratings)
@@ -244,9 +244,9 @@ if __name__ == "__main__":
     connect_to_db(app)
     app.run(
         host="0.0.0.0",
-        use_reloader=True,
-        use_debugger=True,
-    )
+    #     use_reloader=True,
+    #     use_debugger=True,
+     )
     
    
 
