@@ -32,7 +32,7 @@ def home():
 def restaurant_home():
     """Display the homepage"""
 
-    if session['user']:
+    if session.get('user'):
         restaurant_id= int(session['user'])
         user = crud.return_restaurant_by_id((restaurant_id))
         return render_template('restaurant-home.html',user=user.restaurant_name, restaurant_ratings=user.restaurant_ratings)
