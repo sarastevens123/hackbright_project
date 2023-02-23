@@ -1,12 +1,37 @@
 
+.homepage-buttons {
+  background-color: #F3CA40;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #577590;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 50px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top:200px;
 
-
-.login {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: #D78A76;
 }
 
+.homepage-buttons:hover,
+.homepage-buttons:focus {
+  background-color: #F08A4B;
+}
 
 .button-1 {
   background-color: #F3CA40;
@@ -33,6 +58,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-top:100px;
 }
 
 .button-1:hover,
@@ -48,7 +74,16 @@
 }
 
 
+.guest-login-page-body { 
+  margin: 0;
+  padding: 0;
+  height:100vh;
+  background-color:#D78A76;
+  text-align: center;
+  align-items: center;
+  
 
+}
 
 
 
@@ -121,8 +156,10 @@ h1 {
 }
 
 #logo-image {
-  width: 50px;
-  height:auto;
+  width: 1000px;
+  height:200px;
+  margin-left:230px;
+  margin-top: 100px;
 }
 
 #logo-container {
@@ -138,6 +175,8 @@ h1 {
 	padding: 15px;
 	width: 250px;
   height: 250px;
+  margin-top: 50px;
+  margin-left: 350px;
 }
 
 #rating-forms{
@@ -162,6 +201,8 @@ h1 {
 	padding: 15px;
 	width: 250px;
   height: 320px;
+  margin-top: 50px;
+  margin-left: 350px;
   
 }
 
@@ -173,11 +214,7 @@ h1 {
   height:auto
 }
 
-placeholder {
-  font-family: 'Anek Gujarati', sans-serif;
-  color: black;
-  font-size: small;
-}
+
 .user-ratings-container {
   display: flex;
   flex-direction: column;
@@ -195,5 +232,6 @@ placeholder {
   font-size: 10px;
   font-weight: bold;
 }
+
 
 
