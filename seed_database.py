@@ -5,8 +5,8 @@ import crud
 import model
 import server
 
-os.system("dropdb kickback_database")
-os.system("createdb kickback_database")
+os.system("dropdb kickback")
+os.system("createdb kickback")
 
 if __name__ == "__main__":
     

@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session,
 from model import connect_to_db, db, Restaurant, User
 import crud
 from jinja2 import StrictUndefined
+import secrets
 
 
 
@@ -12,7 +13,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 
 
-app.secret_key = "b20e627e21b804e38201ea694f15973e63443d94c4bf7ae4c2c7b5ed99add345"
+app.secret_key = 'Secret'
 app.jinja_env.undefined = StrictUndefined
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 db.init_app(app)
