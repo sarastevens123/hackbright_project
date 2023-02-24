@@ -210,7 +210,8 @@ h1 {
   font-size: 7px;
   color: black;
   width: 200px;
-  height:auto
+  height:auto;
+  margin: 10px
 }
 
 
@@ -235,4 +236,7 @@ h1 {
 body {
   text-align: center;
 }
+
+
+
 
